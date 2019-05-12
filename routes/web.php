@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('top_list');
 });
+
+Route::get('/post', function () {
+    return view('post_bbs');
+});
+
+Route::get('/show', function () {
+    return view('show_bbs');
+});
