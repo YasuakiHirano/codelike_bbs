@@ -11,13 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('top_list');
-});
+Route::get('/', 'TopPage@index')->name("top.index");
 
-Route::get('/post', function () {
-    return view('post_bbs');
-});
+Route::get('/post', 'MakeBoard@index')->name("board.index");
+Route::post('/post/save', 'MakeBoard@save')->name("board.save");
 
 Route::get('/show', function () {
     return view('show_bbs');
