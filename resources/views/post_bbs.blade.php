@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="" method="POST" id="make_board" class="mt-3">
+    <form action="{{ route('board.save') }}" method="POST" id="make_board" class="mt-3">
+        @csrf
         <div class="form-group">
             <label for="board_title">タイトル</label>
             <input type="text" class="form-control" name="board_title" id="board_title" maxlength="140">
@@ -20,7 +21,7 @@
             <input type="password" class="form-control" name="password" id="password" maxlength="20">
         </div>
         <div class="justify-content-center">
-            <button type="button" class="btn btn-primary mx-auto d-block col-3">作成</button>
+            <button type="submit" class="btn btn-primary mx-auto d-block col-3">作成</button>
         </div>
     </form>
 @endsection

@@ -2,17 +2,22 @@
 
 @section('content')
     <div class="mt-3 mb-3 row justify-content-end">
-        <a href="" class="btn btn-primary mr-3">新規登録</a>
+        <a href="{{ route('board.index') }}" class="btn btn-primary mr-3">新規登録</a>
     </div>
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="">とりあえずなリスト１</a>
-        </li>
-        <li class="list-group-item">
-            <a href="">とりあえずなリスト２</a>
-        </li>
-        <li class="list-group-item">
-            <a href="">とりあえずなリスト３</a>
-        </li>
+        @if(isset($board_list))
+            @foreach ($board_list as $board)
+                <li class="list-group-item">
+                    <div class=" d-flex justify-content-between">
+                        {{ $board->title }}
+                        <small>{{ date_format($board->created_at, 'Y/m/d') }}</small>
+                    </div>
+                </li>
+            @endforeach
+        @else
+            <li class="list-group-item">
+                投稿がありません。
+            </li>
+        @endif
     </ul>
 @endsection
