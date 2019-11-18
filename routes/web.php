@@ -11,10 +11,15 @@
 |
 */
 
+// 掲示板一覧[トップ]
 Route::get('/', 'TopPage@index')->name("top.index");
 
+// 掲示板作成
 Route::get('/post', 'MakeBoard@index')->name("board.index");
 Route::post('/post/save', 'MakeBoard@save')->name("board.save");
+
+// 掲示板詳細
+Route::get('/detail', 'DetailPage@index')->name("detail.index");
 
 Route::get('/show', function () {
     return view('show_bbs');

@@ -7,7 +7,7 @@
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">{{ config('codelike_bbs.app_name') }}</a>
+    <a class="navbar-brand" href="{{ route('top.index') }}">{{ config('codelike_bbs.app_name') }}</a>
 </nav>
 <div class="container">
     @yield('content')
