@@ -2,13 +2,14 @@
 
 @section('content')
     <div class="card mt-3">
+        <div class="card-header">
+            {{ $message->title }}
+        </div>
         <div class="card-body">
-            <div>山田太郎</div>
+
+            <div>{{ $message->user_name }}</div>
             <div class="rounded border p-2 mt-2">
-                内容～～～～～～～～～～～～～～～～<br/>
-                内容～～～～～～～～～～～～～～～～<br/>
-                内容～～～～～～～～～～～～～～～～<br/>
-                内容～～～～～～～～～～～～～～～～<br/>
+                {{ $message->about_text }}
             </div>
             <div class="mt-3 mb-3 row justify-content-end">
                 <div class="btn btn-danger">

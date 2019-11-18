@@ -9,7 +9,7 @@
             @foreach ($board_list as $board)
                 <li class="list-group-item">
                     <div class=" d-flex justify-content-between">
-                        {{ $board->title }}
+                        <a href="{{ route('detail.index', ["id" => $board->id]) }}">{{ $board->title }}</a>
                         <small>{{ date_format($board->created_at, 'Y/m/d') }}</small>
                     </div>
                 </li>
