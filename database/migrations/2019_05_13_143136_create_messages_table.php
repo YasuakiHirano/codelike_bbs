@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->string('user_name');
             $table->string('message');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
