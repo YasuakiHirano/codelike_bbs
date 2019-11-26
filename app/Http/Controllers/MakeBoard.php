@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Board;
+use App\Http\Requests\BoardCreateRequest;
+use App\Model\Board;
 use Illuminate\Http\Request;
 
 class MakeBoard extends Controller
@@ -12,7 +13,7 @@ class MakeBoard extends Controller
         return view("post_bbs");
     }
 
-    public function save(Request $request)
+    public function save(BoardCreateRequest $request)
     {
         /** @var Board $board */
         $board = new Board();

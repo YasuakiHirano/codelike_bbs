@@ -1,17 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Message extends Model
+class Board extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'board_id',
+        'title',
         'user_name',
-        'message'
+        'about_text',
+        'password',
     ];
     protected $dates = ['deleted_at'];
 }

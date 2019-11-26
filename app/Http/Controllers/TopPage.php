@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Board;
+use App\Model\Board;
 use Illuminate\Http\Request;
 
 class TopPage extends Controller

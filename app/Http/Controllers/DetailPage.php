@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Board;
-use App\Message;
+use App\Model\Board;
+use App\Model\Message;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
