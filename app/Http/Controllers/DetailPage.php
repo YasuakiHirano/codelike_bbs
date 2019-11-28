@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResponseCreateRequest;
 use App\Model\Board;
 use App\Model\Message;
 use Illuminate\Database\Eloquent\Collection;
@@ -22,7 +23,7 @@ class DetailPage extends Controller
         return view("show_bbs", ['board' => $board_data, 'messages' => $messages]);
     }
 
-    public function makeResponse(Request $request)
+    public function makeResponse(ResponseCreateRequest $request)
     {
         $message = new Message();
         $message->fill([
