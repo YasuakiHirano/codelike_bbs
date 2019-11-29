@@ -5,7 +5,7 @@
         <a href="{{ route('board.index') }}" class="btn btn-primary mr-3">新規登録</a>
     </div>
     <ul class="list-group">
-        @if(isset($board_list))
+        @if($board_list->count() != 0)
             @foreach ($board_list as $board)
                 <li class="list-group-item">
                     <div class=" d-flex justify-content-between">

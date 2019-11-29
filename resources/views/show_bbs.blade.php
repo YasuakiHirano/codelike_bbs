@@ -16,21 +16,41 @@
             $(".message-open").hide("slow");
             $(".message-box").show("slow");
         }
+
+        $(function () {
+            $("#btn-delete").on("click", function () {
+                if ($("#password").val() === "") {
+                    $("#password").show();
+                } else {
+                    if(confirm("削除しますか？")) {
+                        $("#delete_password").val($("#password").val());
+                        $("#delete_form").submit();
+                    }
+                }
+            });
+        });
     </script>
     <div class="card mt-3">
         <div class="card-header">
             {{ $board->title }}
         </div>
         <div class="card-body">
-            <div>{{ $board->user_name }}</div>
-            <div class="rounded border p-2 mt-2">
-                {!! nl2br($board->about_text) !!}
-            </div>
-            <div class="mt-3 mb-3 row justify-content-end">
-                <div class="btn btn-danger">
-                    削除
+            <form action="{{ route("detail.delete") }}" method="post" id="delete_form">
+                @csrf
+                <input type="hidden" value="{{ $board->id }}" name="board_id"/>
+                <input type="hidden" value="" name="delete_password" id="delete_password" />
+                <div>{{ $board->user_name }}</div>
+                <div class="rounded border p-2 mt-2">
+                    {!! nl2br($board->about_text) !!}
                 </div>
-            </div>
+                <div class="mt-3 mb-3 row justify-content-end">
+                    <input type="password" name="password" id="password" value="" class="form-control col-4 mr-2"
+                           style="display:none;" placeholder="パスワード入力..." maxlength="30"/>
+                    <button type="button" id="btn-delete" class="btn btn-danger mr-3">
+                        削除
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <div class="pb-5">

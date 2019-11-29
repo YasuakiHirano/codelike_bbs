@@ -21,3 +21,4 @@ Route::post('/post/save', 'MakeBoard@save')->name("board.save");
 // 掲示板詳細
 Route::get('/detail', 'DetailPage@index')->name("detail.index");
 Route::post('/detail/response', 'DetailPage@makeResponse')->name("detail.response");
+Route::post('/detail/delete', 'DetailPage@deleteBoard')->name("detail.delete");

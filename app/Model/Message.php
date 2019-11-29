@@ -5,6 +5,10 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Message
+ * @package App\Model
+ */
 class Message extends Model
 {
     use SoftDeletes;

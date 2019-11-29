@@ -20,8 +20,8 @@ class BoardCreateRequest extends FormRequest
         return [
             'board_title' => 'required|max:30',
             'user_name' => 'required|max:30',
-            'about_text' => 'required',
-            'password' => 'required'
+            'about_text' => 'required|max:5000',
+            'password' => 'required|max:30'
         ];
     }
 
@@ -51,7 +51,9 @@ class BoardCreateRequest extends FormRequest
             'user_name.required' => ':attributeを入力してください。',
             'user_name.max' => ':attributeは30文字以下で入力してください。',
             'about_text.required' => ':attributeを入力してください。',
-            'password.required' => ':attributeを入力してください。'
+            'about_text.max' => ':attributeは5000文字以下で入力してください。',
+            'password.required' => ':attributeを入力してください。',
+            'password.max' => ':attributeは30文字以下で入力してください。'
         ];
     }
 }
