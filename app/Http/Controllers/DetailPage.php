@@ -47,6 +47,7 @@ class DetailPage extends Controller
             'message' => $request->message
         ])->save();
 
+        $request->flashOnly(['user_name']);
         return redirect()->route("detail.index", ["id" => $request->board_id]);
     }
 

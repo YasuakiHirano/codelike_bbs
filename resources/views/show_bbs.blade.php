@@ -78,11 +78,11 @@
                 <div class="card-body">
                     <div class="form-inline">
                         <label class="col-form-label">名前</label>
-                        <input type="text" name="user_name" class="form-control ml-2 col-5" placeholder="名前を入力..."/>
+                        <input type="text" name="user_name" value="{{ old('user_name') }}" class="form-control ml-2 col-5" placeholder="名前を入力..."/>
                     </div>
                     <div class="form-inline mt-2">
                         <label class="col-form-label">内容</label>
-                        <textarea name="message" class="form-control ml-2 col-10" placeholder="コメントを入力..."></textarea>
+                        <textarea name="message" class="form-control ml-2 col-10" placeholder="コメントを入力...">{{ old('message') }}</textarea>
                     </div>
                     <div class="justify-content-center mt-2">
                         <div class="row">
