@@ -15,7 +15,11 @@
                         <a href="{{ route('detail.index', ["id" => $board->id]) }}"><h4>{{ $board->title }}</h4></a>
                         <small class="text-secondary">{{ date_format($board->created_at, 'Y/m/d') }}</small>
                     </div>
-                    <p class="mb-1">{{ $board->about_text }}</p>
+                    @if(strlen($board->about_text) <= 100)
+                        <p class="mb-1">{{ $board->about_text }}</p>
+                    @else
+                        <p class="mb-1">{{ substr($board->about_text,0,100) }}...</p>
+                    @endif
                     <small class="text-secondary">投稿者：{{ $board->user_name }}</small>
                 </li>
             @endforeach
