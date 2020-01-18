@@ -41,7 +41,7 @@
                 <input type="hidden" value="" name="delete_password" id="delete_password" />
                 <div>{{ $board->user_name }}</div>
                 <div class="rounded border p-2 mt-2">
-                    {!! nl2br($board->about_text) !!}
+                    {!! nl2br(e($board->about_text)) !!}
                 </div>
                 <div class="mt-3 mb-3 row justify-content-end">
                     <input type="password" name="password" id="password" value="" class="form-control col-4 mr-2"
@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <div>{{ $message->user_name }}</div>
                     <div class="rounded border p-2 mt-2">
-                        {!! nl2br($message->message) !!}
+                        {!! nl2br(e($message->message)) !!}
                     </div>
                 </div>
             </div>
