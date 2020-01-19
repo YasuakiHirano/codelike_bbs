@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Board;
+use App\Http\UseCase\TopPage\SelectTopPageCase;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Query\Builder;
 use Illuminate\View\View;
 
 class TopPage extends Controller
 {
     /**
      * トップページ表示
+     * @param SelectTopPageCase $case
      * @return Factory|View
      */
-    public function index()
+    public function index(SelectTopPageCase $case)
     {
-        /** @var Board|Collection|Builder $board */
-        $board = new Board();
-        $board_list = $board->orderBy("created_at", "desc")->paginate(env("PAGE_MAX_LIMIT"));
-
+        $board_list = $case();
         return view('top_list', ['board_list' => $board_list]);
     }
 }
