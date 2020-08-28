@@ -4,12 +4,13 @@ namespace Tests\Unit;
 
 use App\Http\UseCase\MakeBoard\CreateMakeBoardCase;
 use App\Model\Board;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateMakeBoardCaseTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function testRegister()
     {
         Board::truncate();
