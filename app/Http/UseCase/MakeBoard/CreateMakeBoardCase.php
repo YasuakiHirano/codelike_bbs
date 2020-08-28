@@ -10,7 +10,7 @@ class CreateMakeBoardCase
     {
         /** @var Board $board */
         $board = new Board();
-        $board->fill([
+        return $board->fill([
             'title' => $board_title,
             'user_name' => $user_name,
             'about_text' => $about_text,
