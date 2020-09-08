@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\UseCase\MakeBoard;
 
 use App\Http\UseCase\MakeBoard\CreateMakeBoardCase;
 use App\Model\Board;
@@ -13,8 +13,6 @@ class CreateMakeBoardCaseTest extends TestCase
 
     public function testRegister()
     {
-        Board::truncate();
-
         $createMakeBoardCase = new CreateMakeBoardCase();
         $createResult = $createMakeBoardCase->__invoke('boardTitleTest', 'boardUserNameTest', 'boardAboutTextTest', 'boardPasswordTest');
 

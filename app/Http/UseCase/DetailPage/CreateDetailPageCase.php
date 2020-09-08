@@ -11,7 +11,7 @@ class CreateDetailPageCase
     {
         /** @var Message|Collection $message */
         $message = new Message();
-        $message->fill([
+        return $message->fill([
             'board_id' => $board_id,
             'user_name' => $user_name,
             'message' => $param_message
