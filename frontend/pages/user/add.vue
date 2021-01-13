@@ -14,6 +14,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
+import apiClient from 'axios';
+
 @Component({
   name: 'UserAddPage',
 })
@@ -24,6 +26,25 @@ export default class UserAddPage extends Vue {
   password_confirm: any = '';
 
   private async register() {
+    const params = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      password_confirm: this.password_confirm
+    }
+
+    apiClient.defaults.withCredentials = true;
+    await apiClient.get('/sanctum/csrf-cookie').then(async (response) => {
+      await apiClient.post('/api/register', params)
+        .then((response: any) => {
+          if (response.status == 200) {
+            this.$nuxt.$router.push({ path:'board/add' });
+          }
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+    });
 
   }
 }
