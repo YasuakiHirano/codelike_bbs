@@ -33,9 +33,6 @@ export default class TopPage extends Vue {
       await apiClient.post('/api/login', params)
         .then((response: any) => {
           if (response.status == 200) {
-            let token = response.data.token;
-            localStorage.setItem('codelikeBbsToken', token); 
-
             this.$nuxt.$router.push({ path: 'board/add'});
           }
         })

@@ -19,12 +19,7 @@ class LoginController extends Controller
         ]);
  
         if (Auth::attempt($credentials)) {
-            $user = User::whereEmail($request->email)->first();
-
-            $user->tokens()->delete();
-            $token = $user->createToken("login:user{$user->id}")->plainTextToken;
-            
-            return response()->json(['token' => $token ], Response::HTTP_OK);
+            return response()->json('Loggin Success', Response::HTTP_OK);
         }
  
         return response()->json('User Not Found.', Response::HTTP_INTERNAL_SERVER_ERROR);
