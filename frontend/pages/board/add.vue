@@ -19,7 +19,7 @@ import apiClient from 'axios';
 @Component({
   name: 'BoardAddPage',
 })
-export default class UserAddPage extends Vue {
+export default class BoardAddPage extends Vue {
   title: any = '';
   userName: any = '';
   content: any = '';

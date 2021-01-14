@@ -38,7 +38,7 @@ export default class UserAddPage extends Vue {
       await apiClient.post('/api/register', params)
         .then((response: any) => {
           if (response.status == 200) {
-            this.$nuxt.$router.push({ path:'board/add' });
+            this.$nuxt.$router.push({ path:'../board/add' });
           }
         })
         .catch((error: any) => {
