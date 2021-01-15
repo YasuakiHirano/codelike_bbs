@@ -12,7 +12,6 @@ class Board extends Model
     protected $fillable = [
         'title',
         'user_name',
-        'content',
-        'password',
+        'content'
     ];
 }

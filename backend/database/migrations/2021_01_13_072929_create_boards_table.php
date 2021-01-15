@@ -18,7 +18,6 @@ class CreateBoardsTable extends Migration
             $table->string('title');
             $table->string('user_name');
             $table->string('content');
-            $table->string('password');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,10 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use App\Traits\ApiTrait;
 use \Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
+    use ApiTrait;
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -19,9 +22,9 @@ class LoginController extends Controller
         ]);
  
         if (Auth::attempt($credentials)) {
-            return response()->json('Loggin Success', Response::HTTP_OK);
+            return $this->apiResponse('Loggin Success', [], Response::HTTP_OK);
         }
  
-        return response()->json('User Not Found.', Response::HTTP_INTERNAL_SERVER_ERROR);
+        return $this->apiResponse('User Not Found.', [], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
