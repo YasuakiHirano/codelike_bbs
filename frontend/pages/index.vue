@@ -1,42 +1,46 @@
 <template>
   <div>
-    
+    <div v-if="boards.length === 0">
+      <v-alert outlined type="warning" class="mt-5" prominent border="left">
+        表示する掲示板がありません。
+      </v-alert>
+    </div>
+    <div v-if="boards.length !== 0">
+      <v-item v-for="(board, i) in boards" :key="i"> 
+        <v-list-item-group color="primary">
+          <v-list-item class="col-12">
+            <v-list-item-content>
+              <v-list-item-title>{{board.title}}</v-list-item-title>
+              <v-list-item-subtitle>{{board.user_name}}</v-list-item-subtitle>
+              <v-list-item-content>{{board.content}}</v-list-item-content>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+        </v-list-item-group>
+      </v-item>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 import apiClient from 'axios';
+import { BoardFetch } from '@/apis';
+import { Board } from '@/types';
 
 @Component({
   name: 'TopPage',
 })
 export default class TopPage extends Vue {
-  email: any = '';
-  password: any = '';
+  @Prop()
+  boards: Array<Board>|null = [];
 
-  private async signIn() {
-    const params = {
-      email: this.email,
-      password: this.password,
+  private async mounted() {
+    const resultBoards = await BoardFetch();
+    console.log(resultBoards)
+    if (resultBoards) {
+      this.boards = resultBoards;
     }
-
-    apiClient.defaults.withCredentials = true;
-    await apiClient.get('/sanctum/csrf-cookie').then(async () => {
-      await apiClient.post('/api/login', params)
-        .then((response: any) => {
-          if (response.status == 200) {
-            this.$router.push({ path: 'board/add'});
-          }
-        })
-        .catch((error: any) => {
-          console.log(error);
-        });
-    });
-  }
-
-  private moveCreateAccount() {
-    this.$router.push({ path: 'user/add'});
   }
 }
 </script>

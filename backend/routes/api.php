@@ -19,3 +19,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // ログイン
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/board/fetch', [BoardController::class, 'fetch']);

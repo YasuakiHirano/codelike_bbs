@@ -19,3 +19,13 @@ export type BoardCreateResponse = {
     message: string
   } 
 }
+
+export type BoardFetchResponse = {
+  status: number
+  data: {
+    message: {
+      text: string
+      boards: Array<Board>
+    }
+  } 
+}

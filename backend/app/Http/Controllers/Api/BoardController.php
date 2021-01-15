@@ -27,4 +27,16 @@ class BoardController extends Controller
 
         return $this->apiResponse('Create board', [], Response::HTTP_OK); 
     }
+
+    public function fetch(Request $request) {
+        try {
+            $boards = Board::all();
+            return $this->apiResponse(['boards' => $boards], [], Response::HTTP_OK); 
+        } catch(\Throwable $error) {
+            logger()->alert($error->getMessage());
+            return $this->apiResponse('Board Create Error', [], Response::HTTP_INTERNAL_SERVER_ERROR); 
+        }
+
+        return $this->apiResponse('Create board', [], Response::HTTP_OK); 
+    }
 }
