@@ -14,8 +14,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 import apiClient from 'axios';
-import { BoardCreate } from '@/apis';
-import { BoardCreateRequest } from '@/types';
+import { BoardCreate, UserFind } from '@/apis';
+import { BoardCreateRequest, User } from '@/types';
 
 @Component({
   name: 'BoardAddPage',
@@ -29,6 +29,15 @@ export default class BoardAddPage extends Vue {
 
   @Prop()
   content: any = '';
+
+  private async mounted() {
+    // TODO login check
+    // const user:User|null = await UserFind();
+    // if (user === null) {
+    //   this.$nuxt.$emit('warningSnackbar', 'ログインしてから実行してください');
+    //   this.$router.push({ path:'../login' });
+    // } 
+  }
 
   private async register() {
     const params: BoardCreateRequest = {

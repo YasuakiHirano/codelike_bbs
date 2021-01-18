@@ -1,11 +1,16 @@
 <template>
   <div>
-    <div v-if="boards.length === 0">
+    <div class="d-flex justify-end">
+      <v-btn class="primary mb-5" @click="addBoard">
+        新規作成する
+      </v-btn>
+    </div>
+    <div v-if="!boards || boards.length === 0">
       <v-alert outlined type="warning" class="mt-5" prominent border="left">
         表示する掲示板がありません。
       </v-alert>
     </div>
-    <div v-if="boards.length !== 0">
+    <div v-if="boards && boards.length !== 0">
       <v-item v-for="(board, i) in boards" :key="i"> 
         <v-list-item-group color="primary">
           <v-list-item class="col-12">
@@ -25,8 +30,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 import apiClient from 'axios';
-import { BoardFetch } from '@/apis';
-import { Board } from '@/types';
+import { BoardFetch, UserFind } from '@/apis';
+import { Board, User } from '@/types';
 
 @Component({
   name: 'TopPage',
@@ -40,6 +45,15 @@ export default class TopPage extends Vue {
     console.log(resultBoards)
     if (resultBoards) {
       this.boards = resultBoards;
+    }
+  }
+
+  private async addBoard() {
+    // TODO
+    const user:User|null = await UserFind();
+    if (user === null) {
+      this.$nuxt.$emit('warningSnackbar', 'ログインしてから実行してください');
+      this.$router.push({ path:'login' });
     }
   }
 }

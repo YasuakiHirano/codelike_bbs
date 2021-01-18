@@ -1,5 +1,5 @@
 import apiClient from 'axios';
-import { UserCreateRequest, UserCreateResponse } from '@/types';
+import { User, UserCreateRequest, UserCreateResponse } from '@/types';
 
 export const UserCreate = async (params: UserCreateRequest) => {
   apiClient.defaults.withCredentials = true;
@@ -18,4 +18,21 @@ export const UserCreate = async (params: UserCreateRequest) => {
   });
 
   return created;
+}
+
+export const UserFind = async () => {
+  apiClient.defaults.withCredentials = true;
+
+  let user:User| null = null;
+
+  await apiClient.get('/api/user').then(async (response) => {
+    if (response.status === 200) {
+      user = response.data;
+    }
+  })
+  .catch((error: any) => {
+    console.log(error);
+  }); 
+
+  return user;
 }

@@ -85,11 +85,24 @@
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    <v-snackbar v-model="warningBar" color="warning">{{warningMessage}}</v-snackbar>
   </v-app>
 </template>
 
 <script>
 export default {
+  mounted() {
+    this.$nuxt.$on('warningSnackbar', this.onWarningSnackbar);
+  },
+  beforeDestroy() {
+    this.$nuxt.$off('warningSnackbar')
+  },
+  methods:{
+    onWarningSnackbar(message) {
+      this.warningBar = true;
+      this.warningMessage = message;
+    }
+  },
   data () {
     return {
       clipped: false,
@@ -110,7 +123,8 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'codelike bbs'
+      title: 'codelike bbs',
+      warningBar: false,
     }
   }
 }
