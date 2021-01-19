@@ -42,15 +42,19 @@ export default class TopPage extends Vue {
   boards: Array<Board>|null = [];
 
   private async mounted() {
+    this.$nuxt.$loading.start();
     const resultBoards = await BoardFetch();
-    console.log(resultBoards)
     if (resultBoards) {
       this.boards = resultBoards;
     }
+
+    this.$nuxt.$loading.finish();
   }
 
   private async addBoard() {
+    this.$nuxt.$loading.start();
     await UserSignInCheckAndRedirect(this.$nuxt, './login');
+    this.$nuxt.$loading.finish();
     this.$router.push({ path:'../board/add' });
   }
 }

@@ -32,10 +32,12 @@ export default class BoardAddPage extends Vue {
   content: any = '';
 
   private async mounted() {
+    this.$nuxt.$loading.start();
     await UserSignInCheckAndRedirect(this.$nuxt, '../login');
 
     const user:User|null = await UserFind();
     this.userName = user!.name;
+    this.$nuxt.$loading.finish();
   }
 
   private async register() {
@@ -45,10 +47,12 @@ export default class BoardAddPage extends Vue {
       content: this.content,
     }
     
+    this.$nuxt.$loading.start();
     const created: boolean = await BoardCreate(params);
     if (created) {
-      // TODO
+      this.$nuxt.$router.push({ path:'../' });
     }
+    this.$nuxt.$loading.finish();
   }
 }
 </script>

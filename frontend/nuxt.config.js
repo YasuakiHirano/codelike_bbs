@@ -83,4 +83,6 @@ export default {
       changeOrigin: true
     }
   },
+
+  loading: './components/Loding.vue'
 }
