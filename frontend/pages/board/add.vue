@@ -36,7 +36,9 @@ export default class BoardAddPage extends Vue {
     await UserSignInCheckAndRedirect(this.$nuxt, '../login');
 
     const user:User|null = await UserFind();
-    this.userName = user!.name;
+    if (user) {
+      this.userName = user!.name;
+    }
     this.$nuxt.$loading.finish();
   }
 

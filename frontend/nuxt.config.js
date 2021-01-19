@@ -84,5 +84,5 @@ export default {
     }
   },
 
-  loading: './components/Loding.vue'
+  loading: './components/Loading.vue'
 }

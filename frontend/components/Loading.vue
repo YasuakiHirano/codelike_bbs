@@ -4,20 +4,24 @@
   </div>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      loading: false
-    }),
-    methods: {
-      start() {
-        this.loading = true
-      },
-      finish() {
-        this.loading = false
-      }
-    }
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
+
+@Component({
+  name: 'Loading',
+})
+export default class Loading extends Vue {
+  @Prop()
+  private loading: boolean = false;
+
+  private start() {
+    this.loading = true;
   }
+
+  private finish() {
+    this.loading = false;
+  }
+}
 </script>
 
 <style scoped>
