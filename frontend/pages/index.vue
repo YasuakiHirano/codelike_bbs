@@ -32,6 +32,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
 import apiClient from 'axios';
 import { BoardFetch, UserFind } from '@/apis';
 import { Board, User } from '@/types';
+import { UserSignInCheckAndRedirect } from '@/utils';
 
 @Component({
   name: 'TopPage',
@@ -49,12 +50,8 @@ export default class TopPage extends Vue {
   }
 
   private async addBoard() {
-    // TODO
-    const user:User|null = await UserFind();
-    if (user === null) {
-      this.$nuxt.$emit('warningSnackbar', 'ログインしてから実行してください');
-      this.$router.push({ path:'login' });
-    }
+    await UserSignInCheckAndRedirect(this.$nuxt, './login');
+    this.$router.push({ path:'../board/add' });
   }
 }
 </script>
