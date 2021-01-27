@@ -12,6 +12,7 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::post('/board/create', [BoardController::class, 'create']);
+    Route::post('/logout', [LoginController::class, 'logout']);
 });
 
 // ユーザー登録

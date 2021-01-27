@@ -27,4 +27,10 @@ class LoginController extends Controller
  
         return $this->apiResponse('User Not Found.', [], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
+
+    public function logout(Response $response)
+    {
+        Auth::guard('web')->logout();
+        return $this->apiResponse('Logout Success', [], Response::HTTP_OK);
+    }
 }
