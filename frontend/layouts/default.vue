@@ -49,14 +49,26 @@ export default class LayoutDefaultPage extends Vue {
   items:Array<any> = [
     {
       icon: 'mdi-apps',
-      title: 'Top',
+      title: '掲示板一覧',
       to: '/',
       isShow: true
     },
     {
       icon: 'mdi-chart-bubble',
-      title: 'SignIn',
+      title: '新規作成',
+      to: '/board/add',
+      isShow: true
+    },
+    {
+      icon: 'mdi-chart-bubble',
+      title: 'サインイン',
       to: '/login',
+      isShow: false
+    },
+    {
+      icon: 'mdi-chart-bubble',
+      title: 'サインアウト',
+      to: '/logout',
       isShow: false
     }
   ];
@@ -80,16 +92,25 @@ export default class LayoutDefaultPage extends Vue {
   warningMessage:string = '';
 
   @Prop()
-  signedInMenuIndex: number = 1;
+  signedInMenuIndex: number = 2;
+
+  @Prop()
+  signOutMenuIndex: number = 3;
 
   private async mounted() {
-    const signedIn = await isUserSignIn();
-    if (!signedIn) {
-      this.items[this.signedInMenuIndex].isShow = true;
-    }
+    await this.$nextTick(async function () {
+      const signedIn = await isUserSignIn();
+      if (!signedIn) {
+        this.items[this.signedInMenuIndex].isShow = true;
+        this.items[this.signOutMenuIndex].isShow = false;
+      }
+
+      this.onSignedIn();
+    });
 
     this.$nuxt.$on('warningSnackbar', this.onWarningSnackbar);
     this.$nuxt.$on('signedIn', this.onSignedIn);
+    this.$nuxt.$on('signedOut', this.onSignedOut);
   }
 
   private beforeDestroy() {
@@ -104,6 +125,12 @@ export default class LayoutDefaultPage extends Vue {
 
   private onSignedIn() {
     this.items[this.signedInMenuIndex].isShow = false;
+    this.items[this.signOutMenuIndex].isShow = true;
+  }
+
+  private onSignedOut() {
+    this.items[this.signedInMenuIndex].isShow = true;
+    this.items[this.signOutMenuIndex].isShow = false;
   }
 }
 </script>

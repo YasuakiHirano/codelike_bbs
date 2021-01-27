@@ -29,9 +29,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
-import apiClient from 'axios';
-import { BoardFetch, UserFind } from '@/apis';
-import { Board, User } from '@/types';
+import { BoardFetch } from '@/apis';
+import { Board } from '@/types';
 import { UserSignInCheckAndRedirect } from '@/utils';
 
 @Component({
@@ -41,8 +40,11 @@ export default class TopPage extends Vue {
   @Prop()
   boards: Array<Board>|null = [];
 
-  private async mounted() {
-    this.$nuxt.$loading.start();
+  private async created() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    });
+
     const resultBoards = await BoardFetch();
     if (resultBoards) {
       this.boards = resultBoards;

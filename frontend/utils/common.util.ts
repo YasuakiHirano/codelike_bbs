@@ -2,11 +2,15 @@ import { User } from '@/types';
 import { UserFind } from '@/apis';
 
 export const isUserSignIn = async () => {
-  const user:User|null = await UserFind();
-  if (user === null) {
+  try {
+    const user:User|null = await UserFind();
+    if (user === null) {
+      return false;
+    } else {
+      return true;
+    }
+  } catch {
     return false;
-  } else {
-    return true;
   }
 }
 

@@ -31,7 +31,7 @@ export const UserFind = async () => {
     }
   })
   .catch((error: any) => {
-    console.log(error);
+    return null;
   }); 
 
   return user;
