@@ -1,11 +1,13 @@
 <template>
   <div>
-    <v-alert outlined type="success" class="mt-5" prominent border="left" v-if="signOutSuccess">
-      サインアウトしました。
-    </v-alert>
-    <v-alert outlined type="error" class="mt-5" prominent border="left" v-if="signOutSuccess == false">
-      サインアウトに失敗しました。
-    </v-alert>
+    <template v-if="isShow">
+      <v-alert outlined type="success" class="mt-5" prominent border="left" v-if="signOutSuccess">
+        サインアウトしました。
+      </v-alert>
+      <v-alert outlined type="error" class="mt-5" prominent border="left" v-if="signOutSuccess == false">
+        サインアウトに失敗しました。
+      </v-alert>
+    </template>
   </div>
 </template>
 
@@ -18,8 +20,9 @@ import { UserSignOut } from '@/apis';
   name: 'LogoutPage',
 })
 export default class LogoutPage extends Vue {
-  @Prop()
   private signOutSuccess:boolean = false;
+
+  private isShow:boolean = false;
 
   private async mounted() {
     let signOut = false;
@@ -29,6 +32,7 @@ export default class LogoutPage extends Vue {
 
       signOut = await UserSignOut();
       this.signOutSuccess = signOut;
+      this.isShow = true;
 
       this.$nuxt.$loading.finish();
       this.$nuxt.$emit('signedOut');

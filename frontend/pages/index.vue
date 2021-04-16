@@ -11,18 +11,15 @@
       </v-alert>
     </div>
     <div v-if="boards && boards.length !== 0">
-      <v-item v-for="(board, i) in boards" :key="i"> 
-        <v-list-item-group color="primary">
-          <v-list-item class="col-12">
+        <v-list-item-group color="primary" :multiple="false">
+          <v-list-item v-for="(board, i) in boards" :key="i" class="col-12" @click="selectBoard(board.id)">
             <v-list-item-content>
               <v-list-item-title>{{board.title}}</v-list-item-title>
               <v-list-item-subtitle>{{board.user_name}}</v-list-item-subtitle>
               <v-list-item-content>{{board.content}}</v-list-item-content>
             </v-list-item-content>
           </v-list-item>
-          <v-divider></v-divider>
         </v-list-item-group>
-      </v-item>
     </div>
   </div>
 </template>
@@ -37,7 +34,6 @@ import { UserSignInCheckAndRedirect } from '@/utils';
   name: 'TopPage',
 })
 export default class TopPage extends Vue {
-  @Prop()
   boards: Array<Board>|null = [];
 
   private async created() {
@@ -59,5 +55,14 @@ export default class TopPage extends Vue {
     this.$nuxt.$loading.finish();
     this.$router.push({ path:'../board/add' });
   }
+
+  private async selectBoard(boardId: number) {
+    this.$router.push({ path:'../board/detail/' + boardId });
+  }
 }
 </script>
+<style scoped>
+.v-list-item {
+  border-bottom:1px solid rgba(175, 175, 175, 0.911);
+}
+</style>

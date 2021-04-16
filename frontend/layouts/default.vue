@@ -12,7 +12,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar fixed app>
+    <v-app-bar fixed app :light="true">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
     </v-app-bar>
@@ -21,9 +21,6 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
     <v-snackbar v-model="warningBar" color="warning">{{warningMessage}}</v-snackbar>
   </v-app>
 </template>
@@ -36,16 +33,12 @@ import { isUserSignIn } from '~/utils';
   name: 'LayoutDefaultPage',
 })
 export default class LayoutDefaultPage extends Vue {
-  @Prop()
   clipped:boolean = false;
 
-  @Prop()
   drawer:boolean = false;
 
-  @Prop()
   fixed:boolean = false;
 
-  @Prop()
   items:Array<any> = [
     {
       icon: 'mdi-apps',
@@ -73,28 +66,20 @@ export default class LayoutDefaultPage extends Vue {
     }
   ];
 
-  @Prop()
   miniVariant:boolean = false;
 
-  @Prop()
   right:boolean = true;
 
-  @Prop()
   rightDrawer:boolean = false;
 
-  @Prop()
   title:string = 'codelike bbs';
 
-  @Prop()
   warningBar:boolean = false;
 
-  @Prop()
   warningMessage:string = '';
 
-  @Prop()
   signedInMenuIndex: number = 2;
 
-  @Prop()
   signOutMenuIndex: number = 3;
 
   private async mounted() {

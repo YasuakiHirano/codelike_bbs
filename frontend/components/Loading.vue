@@ -11,7 +11,6 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
   name: 'Loading',
 })
 export default class Loading extends Vue {
-  @Prop()
   private loading: boolean = false;
 
   private start() {
