@@ -4,10 +4,11 @@
       elevation="7"
       class="col-12 mt-5"
       shaped
+      v-if="board"
     >
-      <v-card-title>{{ title }}</v-card-title>
-      <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
-      <v-card-text>{{ content }}</v-card-text>
+      <v-card-title>{{ board.title }}</v-card-title>
+      <v-card-subtitle>{{ board.user_name }}</v-card-subtitle>
+      <v-card-text>{{ board.content }}</v-card-text>
     </v-card>
 
     <div class="mt-8">
@@ -26,8 +27,8 @@
     <v-dialog :value="showPostDialog" persistent max-width="800">
       <v-card class="pt-5">
         <v-card-text>
-          <v-text-field label="名前"></v-text-field>
-          <v-textarea  label="内容入力" placeholder="コメントを入力してください"></v-textarea>
+          <v-text-field label="名前" v-model="postUserName"></v-text-field>
+          <v-textarea  label="内容入力" placeholder="コメントを入力してください" v-model="postContent"></v-textarea>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
           <v-btn @click="register()" class="mb-3 col-2">投稿</v-btn>
@@ -40,31 +41,74 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { BoardFind, MessageCreate, MessageFetchByBoardId } from '~/apis';
+import { Board, Message, MessageCreateRequest } from '~/types';
 
 @Component({
   name: 'BoardDetailPage',
 })
 export default class BoardDetailPage extends Vue {
+  boardId: number = 0;
+
   title: string = 'title';
 
   subtitle: string = 'subtitle';
 
   content: string = 'content';
 
+  postUserName: string = '';
+
+  postContent: string = '';
+
   showPostDialog: boolean = false;
 
-  messages: any = [
-    { user_name:'taro1' ,message: 'test1234'},
-    { user_name:'taro2' ,message: 'test1235'},
-    { user_name:'taro3' ,message: 'test1236'},
-  ];
+  board: Board|null = null;
 
-  private register() {
+  messages: Array<Message>|null = [];
 
+  private async register() {
+    const params: MessageCreateRequest = {
+      board_id: this.boardId,
+      user_name: this.postUserName,
+      message: this.postContent,
+    }
+
+    this.showPostDialog = false;
+    this.$nuxt.$loading.start();
+
+    const created: boolean = await MessageCreate(params);
+    if (created) {
+      await this.fetchMessages();
+    }
+
+    this.postUserName = '';
+    this.postContent = '';
+
+    this.$nuxt.$loading.finish();
   }
 
-  private async mounted() {
-    console.log(this.$route.params.id);
+  private async created() {
+    this.boardId = Number(this.$route.params.id);
+
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    });
+
+    const resultBoard = await BoardFind(this.boardId);
+    if (resultBoard) {
+      this.board = resultBoard;
+    }
+
+    await this.fetchMessages();
+
+    this.$nuxt.$loading.finish();
+  }
+
+  private async fetchMessages() {
+    const resultMessages = await MessageFetchByBoardId(this.boardId);
+    if (resultMessages) {
+      this.messages = resultMessages;
+    }
   }
 
 }

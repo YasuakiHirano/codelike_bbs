@@ -1,5 +1,5 @@
 import apiClient from 'axios';
-import { Board, BoardCreateRequest, BoardCreateResponse, BoardFetchResponse } from '@/types';
+import { Board, BoardCreateRequest, BoardCreateResponse, BoardFetchResponse, BoardFindResponse } from '@/types';
 
 export const BoardCreate = async (params: BoardCreateRequest) => {
   apiClient.defaults.withCredentials = true;
@@ -35,4 +35,21 @@ export const BoardFetch = async () => {
     });
 
   return boards;
+}
+
+export const BoardFind = async (boardId: number) => {
+  apiClient.defaults.withCredentials = true;
+
+  let board: Board|null = null;
+  await apiClient.get('/api/board/find', { params: { id: boardId } })
+    .then((response: BoardFindResponse) => {
+      if (response.status == 200) {
+        board = response.data.message.board;
+      }
+    })
+    .catch((error: any) => {
+      console.log(error);
+    });
+
+  return board;
 }
