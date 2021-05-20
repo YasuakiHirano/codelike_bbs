@@ -29,3 +29,12 @@ export type BoardFetchResponse = {
     }
   } 
 }
+
+export type BoardFindResponse = {
+  status: number
+  data: {
+    message: {
+      board: Board
+    }
+  } 
+}
