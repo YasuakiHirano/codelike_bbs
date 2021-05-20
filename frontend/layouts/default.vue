@@ -78,6 +78,8 @@ export default class LayoutDefaultPage extends Vue {
 
   warningMessage:string = '';
 
+  newBoardMenuIndex: number = 1;
+
   signedInMenuIndex: number = 2;
 
   signOutMenuIndex: number = 3;
@@ -85,12 +87,13 @@ export default class LayoutDefaultPage extends Vue {
   private async mounted() {
     await this.$nextTick(async function () {
       const signedIn = await isUserSignIn();
+      console.log("signedIn?");
+      console.log(signedIn);
       if (!signedIn) {
-        this.items[this.signedInMenuIndex].isShow = true;
-        this.items[this.signOutMenuIndex].isShow = false;
+        this.onSignedOut();
+      } else {
+        this.onSignedIn();
       }
-
-      this.onSignedIn();
     });
 
     this.$nuxt.$on('warningSnackbar', this.onWarningSnackbar);
@@ -110,11 +113,13 @@ export default class LayoutDefaultPage extends Vue {
 
   private onSignedIn() {
     this.items[this.signedInMenuIndex].isShow = false;
+    this.items[this.newBoardMenuIndex].isShow = true;
     this.items[this.signOutMenuIndex].isShow = true;
   }
 
   private onSignedOut() {
     this.items[this.signedInMenuIndex].isShow = true;
+    this.items[this.newBoardMenuIndex].isShow = false;
     this.items[this.signOutMenuIndex].isShow = false;
   }
 }
