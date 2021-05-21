@@ -2,7 +2,12 @@
   <div class="d-flex justify-center">
     <v-form class="col-8">
       <v-text-field label="タイトル" v-model="title"></v-text-field>
-      <v-text-field label="名前" v-model="userName" disabled></v-text-field>
+      <template v-if="permissionAddBoard">
+        <v-text-field label="名前" v-model="userName" disabled></v-text-field>
+      </template>
+      <template v-else>
+        <v-text-field label="名前" v-model="userName"></v-text-field>
+      </template> 
       <v-textarea label="内容" v-model="content"></v-textarea>
       <div class="d-flex justify-center">
         <v-btn color="primary" large @click="register">作成する</v-btn>
@@ -17,23 +22,27 @@ import apiClient from 'axios';
 import { BoardCreate, UserFind } from '@/apis';
 import { BoardCreateRequest, User } from '@/types';
 import { UserSignInCheckAndRedirect } from '@/utils';
+import { myConst } from '@/const/index';
 
 @Component({
   name: 'BoardAddPage',
 })
 export default class BoardAddPage extends Vue {
-  @Prop()
   title: any = '';
 
-  @Prop()
   userName: any = '';
 
-  @Prop()
   content: any = '';
 
+  permissionAddBoard: number = 0;
+
   private async mounted() {
+    this.permissionAddBoard = myConst.PERMISSION_ADD_BOARD;
+
     this.$nuxt.$loading.start();
-    await UserSignInCheckAndRedirect(this.$nuxt, '../login');
+    if (myConst.PERMISSION_ADD_BOARD) {
+      await UserSignInCheckAndRedirect(this.$nuxt, '../login');
+    }
 
     const user:User|null = await UserFind();
     if (user) {

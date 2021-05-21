@@ -29,6 +29,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
 import { BoardFetch } from '@/apis';
 import { Board } from '@/types';
 import { UserSignInCheckAndRedirect } from '@/utils';
+import { myConst } from '@/const/index';
 
 @Component({
   name: 'TopPage',
@@ -50,9 +51,11 @@ export default class TopPage extends Vue {
   }
 
   private async addBoard() {
-    this.$nuxt.$loading.start();
-    await UserSignInCheckAndRedirect(this.$nuxt, './login');
-    this.$nuxt.$loading.finish();
+    if (myConst.PERMISSION_ADD_BOARD) {
+      this.$nuxt.$loading.start();
+      await UserSignInCheckAndRedirect(this.$nuxt, './login');
+      this.$nuxt.$loading.finish();
+    }
     this.$router.push({ path:'../board/add' });
   }
 

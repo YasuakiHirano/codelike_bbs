@@ -46,7 +46,8 @@ export default class UserAddPage extends Vue {
     const created: boolean = await UserCreate(params);
     this.$nuxt.$loading.finish();
     if (created) {
-      this.$router.push({ path:'../board/add' });
+      this.$nuxt.$emit('signedIn');
+      this.$router.push({ path:'/' });
     }
   }
 }

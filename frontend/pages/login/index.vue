@@ -38,7 +38,7 @@ export default class LoginPage extends Vue {
     this.$nuxt.$loading.finish();
     if (signedIn) {
       this.$nuxt.$emit('signedIn');
-      this.$router.push({ path: '../board/add'});
+      this.$router.push({ path: '/'});
     }
   }
 
