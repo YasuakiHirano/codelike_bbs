@@ -4,8 +4,8 @@
       <v-text-field label="メールアドレス" v-model="email" ></v-text-field>
       <v-text-field label="パスワード" type="password" v-model="password" ></v-text-field>
       <div class="d-flex justify-center">
-        <v-btn color="primary" large @click="signIn">サインイン</v-btn>
-        <v-btn color="success" large @click="moveCreateAccount" class="ml-2">アカウント作成</v-btn>
+        <v-btn color="primary" large @click="signIn"><v-icon>mdi-login</v-icon>サインイン</v-btn>
+        <v-btn color="success" large @click="moveCreateAccount" class="ml-2"><v-icon>mdi-account-plus</v-icon>アカウント作成</v-btn>
       </div>
     </v-form>
   </div>

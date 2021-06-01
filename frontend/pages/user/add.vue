@@ -6,7 +6,9 @@
       <v-text-field label="パスワード" type="password" v-model="password"></v-text-field>
       <v-text-field label="パスワード確認" type="password" v-model="password_confirm"></v-text-field>
       <div class="d-flex justify-center">
-        <v-btn color="primary" large @click="register">登録する</v-btn>
+        <v-btn color="primary" large @click="register">
+          <v-icon>mdi-account-plus</v-icon>登録する
+        </v-btn>
       </div>
     </v-form>
   </div>

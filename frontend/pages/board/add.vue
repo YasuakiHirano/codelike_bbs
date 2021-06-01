@@ -10,7 +10,9 @@
       </template> 
       <v-textarea label="内容" v-model="content"></v-textarea>
       <div class="d-flex justify-center">
-        <v-btn color="primary" large @click="register">作成する</v-btn>
+        <v-btn color="primary" large @click="register">
+          <v-icon dark>mdi-pencil-plus</v-icon>作成する
+        </v-btn>
       </div>
     </v-form>
   </div>

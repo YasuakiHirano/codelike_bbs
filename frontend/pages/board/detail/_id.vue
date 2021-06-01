@@ -23,7 +23,9 @@
         </v-card>
       </template>
     </div>
-    <v-btn fixed bottom right width="200" height="40" @click="showPostDialog = true">投稿する</v-btn>
+    <v-btn fixed fab bottom right color="primary" @click="showPostDialog = true">
+      <v-icon dark>mdi-message-plus</v-icon>
+    </v-btn>
     <v-dialog :value="showPostDialog" persistent max-width="800">
       <v-card class="pt-5">
         <v-card-text>
@@ -31,8 +33,12 @@
           <v-textarea  label="内容入力" placeholder="コメントを入力してください" v-model="postContent"></v-textarea>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn @click="register()" class="mb-3 col-2">投稿</v-btn>
-          <v-btn @click="showPostDialog = false" class="mb-3 col-2">閉じる</v-btn>
+          <v-btn @click="register()" class="mb-3 pl-5 pr-5 primary">
+            <v-icon>mdi-pencil-plus</v-icon>投稿
+          </v-btn>
+          <v-btn @click="showPostDialog = false" class="mb-3 pl-5 pr-5 warning">
+            <v-icon>mdi-close-circle</v-icon>閉じる
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

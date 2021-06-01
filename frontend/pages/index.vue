@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-end">
       <v-btn class="primary mb-5" @click="addBoard">
-        新規作成する
+        <v-icon dark left>mdi-message-plus</v-icon>新規作成する
       </v-btn>
     </div>
     <div v-if="!boards || boards.length === 0">

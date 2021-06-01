@@ -14,6 +14,7 @@
     </v-navigation-drawer>
     <v-app-bar fixed app :light="true">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <img src="../assets/codelike_logo.png" width="40" />&nbsp;
       <v-toolbar-title v-text="title" />
     </v-app-bar>
     <v-main>
@@ -47,19 +48,19 @@ export default class LayoutDefaultPage extends Vue {
       isShow: true
     },
     {
-      icon: 'mdi-chart-bubble',
+      icon: 'mdi-message-plus',
       title: '新規作成',
       to: '/board/add',
       isShow: true
     },
     {
-      icon: 'mdi-chart-bubble',
+      icon: 'mdi-login',
       title: 'サインイン',
       to: '/login',
       isShow: false
     },
     {
-      icon: 'mdi-chart-bubble',
+      icon: 'mdi-logout',
       title: 'サインアウト',
       to: '/logout',
       isShow: false
